@@ -1,16 +1,16 @@
-## Install the dependencies
+### Install the dependencies
 
 ```bash
 npm install
 ```
 
-### CMD TEST SMTP
+#### CMD TEST SMTP
 
 ```bash
 npm run test-smtp
 ```
 
-### CMD FOR SEND , and make sure your config is correct in .env file
+#### CMD FOR SEND , and make sure your config is correct in .env file
 
 ```bash
 npm run send
