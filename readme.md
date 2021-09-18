@@ -1,10 +1,20 @@
-# CMD TEST SMTP
+## Install the dependencies
 
-    # npm run test-smtp
+```bash
+npm install
+```
 
-# CMD FOR SEND , and make sure your config is correct in .env file
+### CMD TEST SMTP
 
-    # npm run send
+```bash
+npm run test-smtp
+```
+
+### CMD FOR SEND , and make sure your config is correct in .env file
+
+```bash
+npm run send
+```
 
 // Put your mailist in : / mailer/adresses.txt
 // Put your letter in : /mailer/letter.html
