@@ -1,6 +1,6 @@
 /node_modules
-!/logs/*
-!/mailer/*
+/logs/*
+/mailer/*
 package-lock.json
 .vscode
 .Dstore
