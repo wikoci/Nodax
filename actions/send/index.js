@@ -22,7 +22,18 @@ const config_ = {
   proxy: process.env.SMTP_PROXY || null,
 };
 
-const config = cleanDeep(config_);
+var config = cleanDeep(config_);
+
+if (process.env.SMTP_SERVICE) {
+  config = {
+    service: process.env.SMTP_SERVICE,
+    auth: {
+      type: process.env.SMTP_AUTH_TYPE || null,
+      user: process.env.SMTP_USER || null,
+      pass: process.env.SMTP_PASS || null,
+    },
+  };
+}
 const adresses = fs.readFileSync(
   __dirname + "/../../mailer/" + process.env.MAILIST_NAME || "",
   "utf-8"
