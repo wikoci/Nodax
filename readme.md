@@ -18,9 +18,10 @@ npm run send
 
 ### Env variable .env
 
+```bash
+
 ######## --- CONFIG SMTP --- ###########
 
-```bash
 SMTP_HOST=""
 SMTP_PORT=465
 SMTP_AUTH_TYPE="login"
