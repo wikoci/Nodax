@@ -1,8 +1,8 @@
-## CMD TEST SMTP
+# CMD TEST SMTP
 
     # npm run test-smtp
 
-## CMD FOR SEND , and make sure your config is correct in .env file
+# CMD FOR SEND , and make sure your config is correct in .env file
 
     # npm run send
 
