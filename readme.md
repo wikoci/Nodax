@@ -4,7 +4,7 @@
 npm install
 ```
 
-#### CMD TEST SMTP
+#### CMD TEST SMTP : Verify smtp configuration
 
 ```bash
 npm run test-smtp
