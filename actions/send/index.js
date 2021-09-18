@@ -24,11 +24,12 @@ const config_ = {
 
 const config = cleanDeep(config_);
 const adresses = fs.readFileSync(
-  __dirname + "/../../mailer/adresses.txt",
+  __dirname + "/../../mailer/" + process.env.MAILIST_NAME || "",
   "utf-8"
 );
+
 const letterHTML = fs.readFileSync(
-  __dirname + "/../../mailer/letter.html",
+  __dirname + "/../../mailer/" + process.env.LETTER_NAME || "",
   "utf8"
 );
 
