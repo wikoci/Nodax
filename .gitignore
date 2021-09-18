@@ -1,0 +1,8 @@
+/node_modules
+/logs
+!/logs/*
+!/mailer/*
+package-lock.json
+.vscode
+.Dstore
+.DSTORE

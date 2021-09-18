@@ -1,0 +1,29 @@
+{
+  "name": "nodax",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "clean-deep": "^3.4.0",
+    "colors": "^1.4.0",
+    "consola": "^2.15.3",
+    "dotenv": "^10.0.0",
+    "email-regex": "^5.0.0",
+    "email-regex-safe": "^1.0.2",
+    "express": "^4.17.1",
+    "fs": "0.0.1-security",
+    "html-to-text": "^8.0.0",
+    "moment": "^2.29.1",
+    "nodemailer": "^6.6.3",
+    "socks": "^2.6.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "send": "supervisor -e 'env,js,txt,html' ./actions/send/",
+    "test-smtp": "supervisor -e 'env,js' ./actions/verify/",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
