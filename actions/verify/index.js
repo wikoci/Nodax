@@ -11,6 +11,7 @@ const config_ = {
   port: Number(process.env.SMTP_PORT) || null,
   secure: Boolean(process.env.SMTP_SECURE) || null,
   tls: Boolean(process.env.SMTP_TLS) || null,
+  proxy: process.env.SMTP_PROXY || null,
   auth: {
     type: process.env.SMTP_AUTH_TYPE || null,
     user: process.env.SMTP_USER || null,
@@ -28,10 +29,18 @@ if (process.env.SMTP_SERVICE) {
       user: process.env.SMTP_USER || null,
       pass: process.env.SMTP_PASS || null,
     },
+    proxy: process.env.SMTP_PROXY || null,
   };
+
+  config = cleanDeep(config);
 }
 
+console.log("Config : ", config);
+
 const transporter = nodemailer.createTransport(config);
+if (config.proxy) {
+  transporter.set("proxy_socks_module", require("socks"));
+}
 
 async function main() {
   console.log("\nWaiting to connect ....");

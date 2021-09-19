@@ -14,12 +14,12 @@ const config_ = {
   port: Number(process.env.SMTP_PORT) || null,
   secure: Boolean(process.env.SMTP_SECURE) || null,
   tls: Boolean(process.env.SMTP_TLS) || null,
+  proxy: process.env.SMTP_PROXY || null,
   auth: {
     type: process.env.SMTP_AUTH_TYPE || null,
     user: process.env.SMTP_USER || null,
     pass: process.env.SMTP_PASS || null,
   },
-  proxy: process.env.SMTP_PROXY || null,
 };
 
 var config = cleanDeep(config_);
@@ -27,13 +27,19 @@ var config = cleanDeep(config_);
 if (process.env.SMTP_SERVICE) {
   config = {
     service: process.env.SMTP_SERVICE,
+    proxy: process.env.SMTP_PROXY || null,
     auth: {
       type: process.env.SMTP_AUTH_TYPE || null,
       user: process.env.SMTP_USER || null,
       pass: process.env.SMTP_PASS || null,
     },
   };
+
+  config = cleanDeep(config);
 }
+
+console.log("Config : ", config);
+
 const adresses = fs.readFileSync(
   __dirname + "/../../mailer/" + process.env.MAILIST_NAME || "",
   "utf-8"
