@@ -13,8 +13,11 @@
     "express": "^4.17.1",
     "fs": "0.0.1-security",
     "html-to-text": "^8.0.0",
+    "i": "^0.3.6",
+    "local-ip-address": "^1.0.0",
     "moment": "^2.29.1",
     "nodemailer": "^6.6.3",
+    "npm": "^7.24.0",
     "socks": "^2.6.1",
     "supervisor": "^0.12.0"
   },

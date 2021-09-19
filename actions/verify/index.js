@@ -1,4 +1,5 @@
 require("dotenv").config();
+const localIpAddress = require("local-ip-address");
 const consola = require("consola");
 const colors = require("colors");
 const express = require("express");
@@ -7,6 +8,9 @@ const nodemailer = require("nodemailer");
 const cleanDeep = require("clean-deep");
 
 const config_ = {
+  pool: true,
+  connectionTimeout: 5200,
+  localAddress: localIpAddress(),
   host: process.env.SMTP_HOST || null,
   port: Number(process.env.SMTP_PORT) || null,
   secure: Boolean(process.env.SMTP_SECURE) || null,
@@ -38,9 +42,7 @@ if (process.env.SMTP_SERVICE) {
 console.log("Config : ", config);
 
 const transporter = nodemailer.createTransport(config);
-if (config.proxy) {
-  transporter.set("proxy_socks_module", require("socks"));
-}
+transporter.set("proxy_socks_module", require("socks"));
 
 async function main() {
   console.log("\nWaiting to connect ....");
@@ -62,7 +64,9 @@ async function main() {
 
 app.listen(process.env.PORT, () => {
   console.log("\n");
-  console.log(`##### SMTP TEST  IS RUNNIG WAIT FOR LOGS #######`.blue);
+  console.log(
+    `##### SMTP TEST IS RUNNIG  | IP : ${localIpAddress()} ####### `.blue
+  );
   console.log("\n");
   //consola.info("SMTP CONFIG => ", config);
 
