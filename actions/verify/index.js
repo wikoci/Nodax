@@ -8,7 +8,6 @@ const nodemailer = require("nodemailer");
 const cleanDeep = require("clean-deep");
 
 const config_ = {
-  pool: true,
   connectionTimeout: 5200,
   localAddress: localIpAddress(),
   host: process.env.SMTP_HOST || null,

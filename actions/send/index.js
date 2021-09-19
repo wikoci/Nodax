@@ -9,9 +9,10 @@ const cleanDeep = require("clean-deep");
 const fs = require("fs");
 const emailRegexSafe = require("email-regex-safe");
 const { convert } = require("html-to-text");
+const localIpAddress = require("local-ip-address");
 const config_ = {
   connectionTimeout: 5200,
-
+  localAddress: localIpAddress(),
   host: process.env.SMTP_HOST || null,
   port: Number(process.env.SMTP_PORT) || null,
   secure: Boolean(process.env.SMTP_SECURE) || null,
