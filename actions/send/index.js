@@ -64,7 +64,7 @@ if (config.proxy) {
 }
 
 const mail = {
-  priority: EMAIL_PRIORITY || null,
+  priority: process.env.EMAIL_PRIORITY || null,
   from:
     process.env.EMAIL_FROM_NAME + "<" + process.env.EMAIL_FROM + ">" || null,
   subject: process.env.EMAIL_SUBJECT || null,
@@ -115,6 +115,7 @@ async function main() {
   }
 
   console.log("\nAction done ....\n");
+  process.exit(1);
 }
 
 app.listen(process.env.PORT, () => {

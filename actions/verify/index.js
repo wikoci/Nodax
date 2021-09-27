@@ -59,6 +59,7 @@ async function main() {
     });
 
   console.log("\nAction done ....\n");
+  process.exit(1);
 }
 
 app.listen(process.env.PORT, () => {
