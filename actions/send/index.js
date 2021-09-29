@@ -91,7 +91,7 @@ async function main() {
         ok.push(email);
       })
       .catch((err) => {
-        consola.error(`${i} - ${email} Failed => ${err} `);
+        consola.error(`${i}  Failed to => ${email} \n ${err} `);
         fail.push(email);
       });
 
