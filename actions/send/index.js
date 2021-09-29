@@ -10,6 +10,7 @@ const fs = require("fs");
 const emailRegexSafe = require("email-regex-safe");
 const { convert } = require("html-to-text");
 const localIpAddress = require("local-ip-address");
+const { fail } = require("assert");
 const config_ = {
   connectionTimeout: 5200,
   localAddress: localIpAddress(),
@@ -74,31 +75,19 @@ const mail = {
   }),
 };
 
-async function main() {
-  console.log("\nWaiting to connect ....\n");
-  var i = 0;
-  var ok = [];
-  var fail = [];
-  for await (var email of list) {
-    var mailbox = { ...mail };
-    mailbox.to = email;
-    mailbox.date = moment();
+function send_(mailbox, i, ok, fail) {
+  mailbox.to = list[i];
+  transporter
+    .sendMail(mailbox)
+    .then((e) => {
+      consola.success(`${i} - ${mailbox.to} OK`);
+      ok.push(email);
+    })
+    .catch((err) => {
+      consola.error(`${i}  Failed to => ${mailbox.to} \n ${err} `);
+      fail.push(email);
+    });
 
-    transporter
-      .sendMail(mailbox)
-      .then((e) => {
-        consola.success(`${i} - ${email} OK`);
-        ok.push(email);
-      })
-      .catch((err) => {
-        consola.error(`${i}  Failed to => ${email} \n ${err} `);
-        fail.push(email);
-      });
-
-    i++;
-  }
-
-  console.log("\n");
   if (ok.length) {
     consola.info("Sent : ", ok.length, " /logs/passed.txt \n".green);
 
@@ -113,6 +102,15 @@ async function main() {
       __dirname + "/../../logs/failed.txt",
       fail.oString().replace(",", "\n")
     );
+  }
+}
+
+async function main() {
+  console.log("\nWaiting to connect ....\n");
+
+  for (var i = 0; i < list.length; i++) {
+    var mailbox = { ...mail };
+    send_({ ...mail }, ...i, ok, fail);
   }
 
   console.log("\nAction done.... ! use Ctrl + C to exit program .\n");
