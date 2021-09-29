@@ -80,17 +80,18 @@ async function main() {
   var ok = [];
   var fail = [];
   for await (var email of list) {
-    mail.to = email;
-    mail.date = moment();
+    var mailbox = { ...mail };
+    mailbox.to = email;
+    mailbox.date = moment();
 
     transporter
-      .sendMail(mail)
+      .sendMail(mailbox)
       .then((e) => {
         consola.success(`${i} - ${email} OK`);
         ok.push(email);
       })
       .catch((err) => {
-        consola.error(`${i} - ${email} Failed `);
+        consola.error(`${i} - ${email} Failed => ${err} `);
         fail.push(email);
       });
 
