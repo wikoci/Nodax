@@ -58,8 +58,7 @@ async function main() {
       consola.error(err + "".green);
     });
 
-  console.log("\nAction done ....\n");
-  process.exit(1);
+  console.log("\nAction done .... ! use Ctrl + C to exit program \n");
 }
 
 app.listen(process.env.PORT, () => {

@@ -83,7 +83,7 @@ async function main() {
     mail.to = email;
     mail.date = moment();
 
-    await transporter
+    transporter
       .sendMail(mail)
       .then((e) => {
         consola.success(`${i} - ${email} OK`);
@@ -114,8 +114,7 @@ async function main() {
     );
   }
 
-  console.log("\nAction done ....\n");
-  process.exit(1);
+  console.log("\nAction done.... ! use Ctrl + C to exit program .\n");
 }
 
 app.listen(process.env.PORT, () => {
