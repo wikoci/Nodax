@@ -75,21 +75,23 @@ const mail = {
   }),
 };
 
-function send_(mailbox, i, ok, fail) {
+async function send_(mailbox, i, ok, fail) {
   mailbox.to = list[i];
+
+  console.log("Mailbox ", mailbox.to);
   transporter
     .sendMail(mailbox)
     .then((e) => {
-      consola.success(`${i} - ${mailbox.to} OK`);
-      ok.push(email);
+      consola.success(`${i} - ${e.accepted} OK`);
+      ok.push(mailbox.to);
     })
     .catch((err) => {
       consola.error(`${i}  Failed to => ${mailbox.to} \n ${err} `);
-      fail.push(email);
+      fail.push(mailbox.to);
     });
 
   if (ok.length) {
-    consola.info("Sent : ", ok.length, " /logs/passed.txt \n".green);
+    //consola.info("Sent : ", ok.length, " /logs/passed.txt \n".green);
 
     fs.writeFileSync(
       __dirname + "/../../logs/passed.txt",
@@ -97,7 +99,7 @@ function send_(mailbox, i, ok, fail) {
     );
   }
   if (fail.length) {
-    consola.error("Failed : ", fail.length, "/logs/failed.txt) \n");
+    //  consola.error("Failed : ", fail.length, "/logs/failed.txt) \n");
     fs.writeFileSync(
       __dirname + "/../../logs/failed.txt",
       fail.oString().replace(",", "\n")
@@ -108,9 +110,12 @@ function send_(mailbox, i, ok, fail) {
 async function main() {
   console.log("\nWaiting to connect ....\n");
 
+  var ok = [];
+  var fail = [];
+
   for (var i = 0; i < list.length; i++) {
     var mailbox = { ...mail };
-    send_({ ...mail }, ...i, ok, fail);
+    send_({ ...mail }, i, ok, fail);
   }
 
   console.log("\nAction done.... ! use Ctrl + C to exit program .\n");

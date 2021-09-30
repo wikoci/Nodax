@@ -26,7 +26,7 @@
   },
   "devDependencies": {},
   "scripts": {
-    "send": "supervisor -e 'env,js,txt,html' ./actions/send/",
+    "send": "supervisor -e 'env,js,html' ./actions/send/",
     "test-smtp": "supervisor -e 'env,js' ./actions/verify/",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
