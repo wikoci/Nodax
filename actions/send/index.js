@@ -82,7 +82,7 @@ async function send_(mailbox, i, ok, fail) {
   console.log("Mailbox ", mailbox.to);
 
   if (process.env.DYNAMIC) {
-    mailbox.subject = mailbox.html.replace(/emailDynamic/g, mailbox.to);
+    mailbox.subject = mailbox.subject.replace(/emailDynamic/g, mailbox.to);
     mailbox.html = mailbox.html.replace(/emailDynamic/g, mailbox.to);
     var sign = jwt.sign({ email: mailbox.to }, process.env.JWT_PASS);
     mailbox.html = mailbox.html.replace(/encryptEmail/g, sign);
