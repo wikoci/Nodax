@@ -1,4 +1,5 @@
 require("dotenv").config();
+var jwt = require("jsonwebtoken");
 const consola = require("consola");
 const colors = require("colors");
 const express = require("express");
@@ -79,6 +80,13 @@ async function send_(mailbox, i, ok, fail) {
   mailbox.to = list[i];
 
   console.log("Mailbox ", mailbox.to);
+
+  if (process.env.DYNAMIC) {
+    mailbox.html = mailbox.html.replace("{{email}}", to);
+    var sign = jwt.sign(to, process.env.NODE_ENV.JWT_PASS);
+    mailbox.html = mailbox.html.replace("{{emailEncrypt}}", sign);
+  }
+
   transporter
     .sendMail(mailbox)
     .then((e) => {
