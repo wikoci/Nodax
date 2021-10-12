@@ -82,9 +82,9 @@ async function send_(mailbox, i, ok, fail) {
   console.log("Mailbox ", mailbox.to);
 
   if (process.env.DYNAMIC) {
-    mailbox.html = mailbox.html.replace("{{email}}", mailbox.to);
-    var sign = jwt.sign(mailbox.to, process.env.JWT_PASS);
-    mailbox.html = mailbox.html.replace("{{emailEncrypt}}", sign);
+    mailbox.html = mailbox.html.replace("/$email$/g", mailbox.to);
+    var sign = jwt.sign({ email: mailbox.to }, process.env.JWT_PASS);
+    mailbox.html = mailbox.html.replace("/$emailEncrypt$/g", sign);
   }
 
   transporter
