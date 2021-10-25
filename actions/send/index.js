@@ -20,6 +20,9 @@ const config_ = {
   secure: Boolean(process.env.SMTP_SECURE) || null,
   tls: Boolean(process.env.SMTP_TLS) || null,
   proxy: process.env.SMTP_PROXY || null,
+  pool: true,
+  maxMessages: process.env.SMTP_MAXMESSAGE || 100,
+  maxConnections: process.env.SMTP_MAXCONNECTION || 5,
   auth: {
     type: process.env.SMTP_AUTH_TYPE || null,
     user: process.env.SMTP_USER || null,
